@@ -1,0 +1,8 @@
+# action.yml
+name: 'StepFunction Deployment Monitoring'
+description: 'Polls a step function until completion.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.STEP_FUNCTION_ARN }}
