@@ -22,11 +22,11 @@ The StepFunction execution arn that you wish to track the status of.
 
 ## Authors
 
-* FreeAgent dev-platform opensource@freeagent.com
+* FreeAgent Ops opensource@freeagent.com
 ## Licence
 
 ```
-Copyright 2021 FreeAgent Central Ltd.
+Copyright 2022 FreeAgent Central Ltd.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
