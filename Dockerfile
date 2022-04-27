@@ -7,5 +7,4 @@ RUN cd /usr/src/app && bundle install
 
 RUN chmod +x /usr/src/app/entrypoint.sh
 
-# ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 ENTRYPOINT ["ruby", "/usr/src/app/app.rb"]

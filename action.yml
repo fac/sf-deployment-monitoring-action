@@ -5,4 +5,4 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.STEP_FUNCTION_ARN }}
+    - ${{ inputs.EXECUTION_ARN }}
