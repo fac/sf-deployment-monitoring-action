@@ -1,5 +1,7 @@
 require 'aws-sdk-states'
 
+STDOUT.sync = true
+
 if ENV['EXECUTION_ARN'].nil?
   puts 'EXECUTION_ARN is required. Please set it as an ENV Variable.'
   exit 1
