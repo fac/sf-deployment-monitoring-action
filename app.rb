@@ -15,6 +15,7 @@ end
 # One of: "RUNNING", "SUCCEEDED", "FAILED", "TIMED_OUT", "ABORTED"
 if deployment_status == 'RUNNING'
   puts 'Deployment in progress...🔄'
+  puts "Monitor at https://eu-west-1.console.aws.amazon.com/states/home?region=eu-west-1#/executions/details/#{ENV['EXECUTION_ARN']}"
   sleep 15 until deployment_status != 'RUNNING'
 end
 
