@@ -6,3 +6,8 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.EXECUTION_ARN }}
+outputs:
+  deployment_failed:
+    description: True or false depending on whether the deployment failed
+  deployment_failure_reason:
+    description: A brief explanation on why the deployment failed

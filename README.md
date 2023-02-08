@@ -20,6 +20,22 @@ GitHub Action used to monitor AWS StepFunction deployments.
 
 The StepFunction execution arn that you wish to track the status of.
 
+
+## Development
+
+Install locally with 
+
+```bash
+bundle install
+```
+
+Then, if you have an AWS StepFunction execution ARN you can test the logic as follows:
+
+```bash
+export EXECUTION_ARN=arn:aws:states:eu-west-1:123456789012:execution:example-state-machine:12345678-9012-3456-7890-123456789012
+ruby app.rb # Remember to take care of authentication with AWS. For example, if you are using vault, then you could execute `aws-vault exec myprofile -- ruby app.rb
+```
+
 ## Authors
 
 * FreeAgent Ops opensource@freeagent.com
