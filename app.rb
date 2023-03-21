@@ -25,7 +25,19 @@ def failure_reason(aws_client, execution_arn)
 
   event_type = resp.events[1].type
   if event_type == "LambdaFunctionFailed"
-    deploy_fail_reason = JSON.parse(resp.events[1].lambda_function_failed_event_details.cause)['errorMessage']
+    error_message = JSON.parse(resp.events[1].lambda_function_failed_event_details.cause)['errorMessage']
+    if error_message.include? "Pre flight checks failed"
+      preflight_checks_output = error_message.lines[1]
+      forward_deploy_check_result =  preflight_checks_output.match(/ForwardDeployCheck=>"(.*)",/i).captures[0]
+      if forward_deploy_check_result == "FAILED"
+        deploy_fail_reason = "Forward deploy check FAILED. No need to panic! "\
+                             "This likely means your commit has already been deployed as part of a previous deploy. "\
+                             "To confirm you can check whether your SHA is a parent commit to the currently deployed SHA. "\
+                             "You can figure out the currently deployed SHA by following this guide https://www.notion.so/freeagent/Deployment-Runbooks-29796221387e40b7abbb217d7d33c4ac?pvs=4#3bfa2ab5d3ab4c33b7a46522027f94bb"
+        return deploy_fail_reason
+      end
+    end
+    deploy_fail_reason = error_message
   elsif event_type == "FailStateEntered"
     error_message = JSON.parse(JSON.parse(resp.events[1].state_entered_event_details.input)['Error']['Cause'])['errorMessage']
     if error_message.include? "ECS" and error_message.include? "IN_PROGRESS"
