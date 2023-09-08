@@ -28,7 +28,7 @@ def failure_reason(aws_client, execution_arn)
     error_message = JSON.parse(resp.events[1].lambda_function_failed_event_details.cause)['errorMessage']
     if error_message.include? "Pre flight checks failed"
       preflight_checks_output = error_message.lines[1]
-      forward_deploy_check_result =  preflight_checks_output.match(/ForwardDeployCheck=>"(.*)",/i).captures[0]
+      forward_deploy_check_result =  preflight_checks_output.match(/ForwardDeployCheck=>"(.*?)"/i).captures[0]
       if forward_deploy_check_result == "FAILED"
         deploy_fail_reason = "Forward deploy check FAILED. No need to panic! "\
                              "This likely means your commit has already been deployed as part of a previous deploy. "\
