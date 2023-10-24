@@ -1,3 +1,7 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fac_sf-deployment-monitoring-action&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fac_sf-deployment-monitoring-action)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=fac_sf-deployment-monitoring-action&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=fac_sf-deployment-monitoring-action)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=fac_sf-deployment-monitoring-action&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=fac_sf-deployment-monitoring-action)
+
 # Step Function Deployment Monitoring
 
 ## Description
@@ -23,7 +27,7 @@ The StepFunction execution arn that you wish to track the status of.
 
 ## Development
 
-Install locally with 
+Install locally with
 
 ```bash
 bundle install
