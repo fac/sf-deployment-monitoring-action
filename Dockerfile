@@ -5,4 +5,4 @@ COPY . /usr/src/app
 
 RUN cd /usr/src/app && bundle install
 
-ENTRYPOINT ["ruby", "/usr/src/app/app.rb"]
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
