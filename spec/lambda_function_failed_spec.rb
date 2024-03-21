@@ -24,7 +24,7 @@ RSpec.describe Deployment::Events::LambdaFunctionFailed do
 
     describe(:error) do
       it 'returns the correct error message' do
-        expect(deployment.error).to start_with('Forward deploy check FAILED.')
+        expect(deployment.error).to start_with('The following pre-flight checks have failed: ForwardDeployCheck')
       end
     end
   end
@@ -48,7 +48,7 @@ RSpec.describe Deployment::Events::LambdaFunctionFailed do
 
     describe(:error) do
       it 'returns full preflight failure details' do
-        expect(deployment.error == '{"RequiredParameters":"FAILED","CommitCheck":"PASSED","ScheduleCheck":"PASSED","ForwardDeployCheck":"PASSED"}')
+        expect(deployment.error).to start_with('The following pre-flight checks have failed: RequiredParameters.')
       end
     end
   end
