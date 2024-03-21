@@ -7,30 +7,27 @@ module Deployment
       end
 
       def error
-        if preflight_checks_failed? && forward_deploy_check_failed?
-          'Forward deploy check FAILED. No need to panic! '\
-          'This likely means your commit has already been deployed as part of a previous deploy. '\
-          'To confirm you can check whether your SHA is a parent commit to the currently deployed SHA. '\
-          'You can figure out the currently deployed SHA by following this guide https://www.notion.so/freeagent/Deployment-Runbooks-29796221387e40b7abbb217d7d33c4ac?pvs=4#3bfa2ab5d3ab4c33b7a46522027f94bb'
-        elsif preflight_checks_failed?
-          preflight_checks_output.to_json
+        if preflight_checks_failed?
+          "The following pre-flight checks have failed: #{preflight_checks_failed.join(',')}. "\
+          'See https://www.notion.so/freeagent/Deployment-Playbooks-aa0f91db24954b328ebfc7d87963a185#3193a48ea76e46b29a38027150612b0d'
         else
           @error_message
         end
       end
 
       private
+
       def preflight_checks_failed?
         @error_message.include? 'Pre flight checks failed'
       end
 
-      def preflight_checks_output
-        # This is horrible and dangerous but we control the input from the lambda. Ideally we should fix there but for now.
-        eval(@error_message.split("\n")[1])["Checks"]
+      def preflight_checks_failed
+        preflight_checks_output.select { |_k, v| v == 'FAILED' }.keys
       end
 
-      def forward_deploy_check_failed?
-        preflight_checks_output[:ForwardDeployCheck] == 'FAILED'
+      def preflight_checks_output
+        # This is horrible and dangerous but we control the input from the lambda. Ideally we should fix there but for now.
+        eval(@error_message.split("\n")[1])['Checks']
       end
     end
   end
