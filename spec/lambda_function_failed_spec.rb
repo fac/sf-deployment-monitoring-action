@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe Deployment::Events::LambdaFunctionFailed do
   subject(:deployment) { Deployment::Events::LambdaFunctionFailed.new(event) }
 
-  context 'forward deploy pre-flight check failed' do
+  context 'one pre flight check failed' do
     let(:event) do
       Aws::States::Types::HistoryEvent.new(
         type: 'LambdaFunctionFailed',
@@ -29,14 +29,14 @@ RSpec.describe Deployment::Events::LambdaFunctionFailed do
     end
   end
 
-  context 'some other pre-flight check failed' do
+  context 'multiple pre flight checks failed' do
     let(:event) do
       Aws::States::Types::HistoryEvent.new(
         type: 'LambdaFunctionFailed',
         lambda_function_failed_event_details: Aws::States::Types::LambdaFunctionFailedEventDetails.new(
           cause: '
             {
-              "errorMessage": "Pre flight checks failed:\n{\"Checks\"=>{:RequiredParameters=>\"FAILED\", :CommitCheck=>\"PASSED\", :ScheduleCheck=>\"PASSED\", :ForwardDeployCheck=>\"PASSED\"}, \"Status\"=>\"FAILED\"}",
+              "errorMessage": "Pre flight checks failed:\n{\"Checks\"=>{:RequiredParameters=>\"FAILED\", :CommitCheck=>\"FAILED\", :ScheduleCheck=>\"FAILED\", :ForwardDeployCheck=>\"PASSED\"}, \"Status\"=>\"FAILED\"}",
               "errorType": "Function<StandardError>",
               "stackTrace": [
                 "/var/task/pre_flight_checks.rb:145:in `handler"
@@ -48,7 +48,7 @@ RSpec.describe Deployment::Events::LambdaFunctionFailed do
 
     describe(:error) do
       it 'returns full preflight failure details' do
-        expect(deployment.error).to start_with('The following pre-flight checks have failed: RequiredParameters.')
+        expect(deployment.error).to start_with('The following pre-flight checks have failed: CommitCheck, RequiredParameters, ScheduleCheck.')
       end
     end
   end
