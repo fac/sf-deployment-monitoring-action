@@ -157,7 +157,19 @@ RSpec.describe Deployment::Deployment do
         Aws::States::Types::GetExecutionHistoryOutput.new(
           events: [
             '',
-            Aws::States::Types::HistoryEvent.new(type: 'LambdaFunctionFailed')
+            Aws::States::Types::HistoryEvent.new(
+              type: 'LambdaFunctionFailed',
+              lambda_function_failed_event_details: Aws::States::Types::LambdaFunctionFailedEventDetails.new(
+                cause: '
+                  {
+                    "errorMessage": "Pre flight checks failed:\n{\"Checks\"=>{:RequiredParameters=>\"PASSED\", :CommitCheck=>\"PASSED\", :ScheduleCheck=>\"PASSED\", :ForwardDeployCheck=>\"FAILED\"}, \"Status\"=>\"FAILED\"}",
+                    "errorType": "Function<StandardError>",
+                    "stackTrace": [
+                      "/var/task/pre_flight_checks.rb:145:in `handler"
+                    ]
+                  }'
+              )
+            )
           ]
         )
       end
