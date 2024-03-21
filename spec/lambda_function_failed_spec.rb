@@ -47,8 +47,8 @@ RSpec.describe Deployment::Events::LambdaFunctionFailed do
     end
 
     describe(:error) do
-      it 'returns a generic Pre flight checks failed error message' do
-        expect(deployment.error).to start_with('Pre flight checks failed:')
+      it 'returns full preflight failure details' do
+        expect(deployment.error == '{"RequiredParameters":"FAILED","CommitCheck":"PASSED","ScheduleCheck":"PASSED","ForwardDeployCheck":"PASSED"}')
       end
     end
   end
