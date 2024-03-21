@@ -8,7 +8,7 @@ module Deployment
 
       def error
         if preflight_checks_failed?
-          "The following pre-flight checks have failed: #{preflight_checks_failed.join(',')}. "\
+          "The following pre-flight checks have failed: #{preflight_checks_failed.join(', ')}. "\
           'See https://www.notion.so/freeagent/Deployment-Playbooks-aa0f91db24954b328ebfc7d87963a185#3193a48ea76e46b29a38027150612b0d'
         else
           @error_message
@@ -22,7 +22,7 @@ module Deployment
       end
 
       def preflight_checks_failed
-        preflight_checks_output.select { |_k, v| v == 'FAILED' }.keys
+        preflight_checks_output.select { |_k, v| v == 'FAILED' }.keys.sort
       end
 
       def preflight_checks_output
