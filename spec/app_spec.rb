@@ -66,10 +66,8 @@ RSpec.describe 'app' do
         [
           "deployment_failed=true\n",
           'deployment_failure_reason=' \
-            'Forward deploy check FAILED. No need to panic! '\
-            'This likely means your commit has already been deployed as part of a previous deploy. '\
-            'To confirm you can check whether your SHA is a parent commit to the currently deployed SHA. '\
-            "You can figure out the currently deployed SHA by following this guide https://www.notion.so/freeagent/Deployment-Runbooks-29796221387e40b7abbb217d7d33c4ac?pvs=4#3bfa2ab5d3ab4c33b7a46522027f94bb\n"
+          'The following pre-flight checks have failed: ForwardDeployCheck. '\
+          "See https://www.notion.so/freeagent/Deployment-Playbooks-aa0f91db24954b328ebfc7d87963a185#3193a48ea76e46b29a38027150612b0d\n"
         ]
       )
     end
