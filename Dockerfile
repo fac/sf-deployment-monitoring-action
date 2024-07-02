@@ -1,5 +1,5 @@
 # Container image
-FROM ruby:3.1.1
+FROM public.ecr.aws/docker/library/ruby:3.1.1
 
 COPY . /usr/src/app
 
