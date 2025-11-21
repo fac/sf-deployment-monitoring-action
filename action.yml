@@ -1,6 +1,10 @@
 name: StepFunction Deployment Monitoring
 author: FreeAgent
 description: Polls a step function until completion.
+inputs:
+  execution_arn:
+    description: ARN of a State Machine execution to monitor
+    required: true
 outputs:
   deployment_failed:
     description: true or false depending on whether the deployment failed
@@ -8,7 +12,14 @@ outputs:
     description: A brief explanation on why the deployment failed
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.EXECUTION_ARN }}
+  using: composite
+  steps:
+    - uses: ruby/setup-ruby@d5126b9b3579e429dd52e51e68624dda2e05be25 # v1.267.0
+      with:
+        bundler-cache: true
+    - shell: bash
+      env:
+        EXECUTION_ARN: ${{ inputs.execution_arn }}
+      run: |
+        cd "${{ github.action_path }}"
+        bundle exec ruby app.rb
