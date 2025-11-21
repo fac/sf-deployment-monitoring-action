@@ -1,0 +1,21 @@
+version: 2
+registries:
+  - package-ecosystem: "github-actions"
+    directories:
+      - "/"
+    rebase-strategy: "disabled"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 99
+    cooldown:
+      default-days: 7
+  - package-ecosystem: "bundler"
+    directories:
+      - "/"
+    rebase-strategy: "disabled"
+    insecure-external-code-execution: allow
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 99
+    cooldown:
+      default-days: 7
