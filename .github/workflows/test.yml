@@ -1,0 +1,28 @@
+name: Test
+
+on:
+  push:
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        suite:
+          - rspec
+          - rubocop
+
+    name: Run ${{ matrix.suite }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@d5126b9b3579e429dd52e51e68624dda2e05be25 # v1.267.0
+        env:
+          BUNDLE_WITH: test
+        with:
+          bundler-cache: true
+      - env:
+          SUITE: ${{ matrix.suite }}
+        run: bundle exec "$SUITE"
