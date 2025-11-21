@@ -1,7 +1,4 @@
 GEM
-  specs:
-
-GEM
   remote: https://rubygems.org/
   specs:
     aws-eventstream (1.2.0)
@@ -40,13 +37,14 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-23
+  arm64-darwin-24
   x86_64-linux
 
 DEPENDENCIES
-  aws-sdk-states!
-  nokogiri!
-  rspec!
-  rspec-mocks!
+  aws-sdk-states
+  nokogiri
+  rspec
+  rspec-mocks
 
 BUNDLED WITH
    2.3.7

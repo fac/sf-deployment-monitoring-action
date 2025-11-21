@@ -1,9 +1,9 @@
-source 'https://rubygems.org' do
-  gem 'aws-sdk-states'
+source 'https://rubygems.org'
 
-  group :test do
-    gem 'nokogiri'
-    gem 'rspec'
-    gem 'rspec-mocks'
-  end
+gem 'aws-sdk-states'
+
+group :test do
+  gem 'nokogiri'
+  gem 'rspec'
+  gem 'rspec-mocks'
 end
