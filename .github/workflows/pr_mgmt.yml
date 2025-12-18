@@ -1,0 +1,11 @@
+name: "Pull Request and Issue Management"
+on:
+  issues:
+    types: [opened, reopened]
+  pull_request:
+    types: [review_requested]
+
+jobs:
+  pr_mgmt:
+    uses: fac/ops-shared-workflows/.github/workflows/pr_mgmt.yml@main
+    secrets: inherit
